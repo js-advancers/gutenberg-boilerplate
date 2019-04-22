@@ -6,9 +6,6 @@ registerBlockType("jsadvancers/basic-block", {
   icon: "palmtree",
   attributes: {},
   category: "common",
-  supports: {
-    align: ["left", "right"]
-  },
   edit: props => {
     return <p className={props.className}>Hello World!</p>;
   },
