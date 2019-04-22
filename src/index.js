@@ -1,15 +1,1 @@
-const { registerBlockType } = wp.blocks;
-
-registerBlockType("jsadvancers/basic-block", {
-  title: "Basic Block",
-  description: "Our cool basic Gutenberg Block",
-  icon: "palmtree",
-  attributes: {},
-  category: "common",
-  edit: props => {
-    return <p className={props.className}>Hello World!</p>;
-  },
-  save: props => {
-    return <p className={props.className}>Hello World!</p>;
-  }
-});
+// register a bbasic block that is just returning spme plain html inside the edit and save method
