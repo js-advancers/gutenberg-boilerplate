@@ -21,6 +21,18 @@ function register_block_types() {
         $script_deps['version']
     );
 
+    wp_register_style(
+        "example-block-styles",
+        plugins_url("/style.css", __FILE__ ),
+        []
+    );
+
+    wp_register_style(
+        "example-block-editor-styles",
+        plugins_url("/editor.css", __FILE__ ),
+        []
+    );
+
     register_block_type('jsadvancers/example', [
         'editor_script' =>  'example-block',
         'style' =>  'example-block-styles',
