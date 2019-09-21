@@ -3,33 +3,36 @@ import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
 const ToggleSidebarButton = ( {
-	isEditorSidebarOpened,
-	openGeneralSidebar,
+	isSidebarOpened,
+	openSidebar,
+	closeSidebar,
 } ) => {
-	if ( isEditorSidebarOpened ) {
-		return null;
-	}
 	return (
-		<Button className="is-button is-primary" onClick={ openGeneralSidebar }>
-            Open Block Settings
-		</Button>
+		isSidebarOpened ? (
+			<Button className="is-button is-primary" onClick={ closeSidebar }>
+				Close Sidebar
+			</Button>
+		) : (
+			<Button className="is-button is-primary" onClick={ openSidebar }>
+				Open Sidebar
+			</Button>
+		)
 	);
 };
 
 export default compose(
 	withSelect( ( select ) => {
 		return {
-			isEditorSidebarOpened: select( 'core/edit-post' ).isEditorSidebarOpened(),
+			isSidebarOpened: select( 'core/edit-post' ).isEditorSidebarOpened(),
 		};
 	} ),
-	withDispatch( ( dispatch, ownProps, { select } ) => {
-		const { getBlockSelectionStart } = select( 'core/editor' );
+	withDispatch( ( dispatch ) => {
 		const { openGeneralSidebar, closeGeneralSidebar } = dispatch( 'core/edit-post' );
 
 		return {
-			openGeneralSidebar: () =>
-				openGeneralSidebar( getBlockSelectionStart() ? 'edit-post/block' : 'edit-post/document' ),
-			closeGeneralSidebar,
+			openSidebar: () =>
+				openGeneralSidebar( 'edit-post/block' ),
+			closeSidebar: closeGeneralSidebar,
 		};
 	} )
 )( ToggleSidebarButton );
