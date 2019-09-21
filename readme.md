@@ -1,8 +1,6 @@
-# HOC Examples `withDispatch` `withSelect` & `compose`
+# Gutenberg Boilerplate
 
-this week we are playing arround with Higher Order Components. 
-
-Tge project is to build a Gutenberg block that has the Abbility to open or close the Block sidebar based on wether or not it is open. 
+This is meant to be a startingpoint for our small projects.
 
 ## Development
 
