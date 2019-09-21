@@ -20,19 +20,18 @@ const ToggleSidebarButton = ( {
 	);
 };
 
-export default compose(
+const toggleSidebarHOC = ( component ) => compose(
 	withSelect( ( select ) => {
 		return {
 			isSidebarOpened: select( 'core/edit-post' ).isEditorSidebarOpened(),
 		};
 	} ),
 	withDispatch( ( dispatch ) => {
-		const { openGeneralSidebar, closeGeneralSidebar } = dispatch( 'core/edit-post' );
-
 		return {
-			openSidebar: () =>
-				openGeneralSidebar( 'edit-post/block' ),
-			closeSidebar: closeGeneralSidebar,
+			openSidebar: () => dispatch( 'core/edit-post' ).openGeneralSidebar( 'edit-post/block' ),
+			closeSidebar: () => dispatch( 'core/edit-post' ).closeGeneralSidebar(),
 		};
 	} )
-)( ToggleSidebarButton );
+)( component );
+
+export default toggleSidebarHOC( ToggleSidebarButton );
