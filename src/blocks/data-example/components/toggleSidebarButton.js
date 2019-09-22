@@ -1,37 +1,22 @@
 import { Button } from '@wordpress/components';
-import { withSelect, withDispatch } from '@wordpress/data';
-import { compose } from '@wordpress/compose';
+import { useSelect, dispatch } from '@wordpress/data';
 
-const ToggleSidebarButton = ( {
-	isSidebarOpened,
-	openSidebar,
-	closeSidebar,
-} ) => {
+const ToggleSidebarButton = () => {
+	const [ isSidebarOpened, toggleSidebar ] = useSidebarToggle();
 	return (
-		isSidebarOpened ? (
-			<Button className="is-button is-primary" onClick={ closeSidebar }>
-				Close Sidebar
-			</Button>
-		) : (
-			<Button className="is-button is-primary" onClick={ openSidebar }>
-				Open Sidebar
-			</Button>
-		)
+		<Button isPrimary isDefault onClick={ toggleSidebar }>
+			{ isSidebarOpened ? 'Close' : 'Open' } Sidebar
+		</Button>
 	);
 };
 
-const toggleSidebarHOC = ( component ) => compose(
-	withSelect( ( select ) => {
-		return {
-			isSidebarOpened: select( 'core/edit-post' ).isEditorSidebarOpened(),
-		};
-	} ),
-	withDispatch( ( dispatch ) => {
-		return {
-			openSidebar: () => dispatch( 'core/edit-post' ).openGeneralSidebar( 'edit-post/block' ),
-			closeSidebar: () => dispatch( 'core/edit-post' ).closeGeneralSidebar(),
-		};
-	} )
-)( component );
+const useSidebarToggle = () => {
+	const isSidebarOpened = useSelect( ( select ) => select( 'core/edit-post' ).isEditorSidebarOpened() );
+	const openSidebar = () => dispatch( 'core/edit-post' ).openGeneralSidebar( 'edit-post/block' );
+	const closeSidebar = () => dispatch( 'core/edit-post' ).closeGeneralSidebar();
+	const toggleSidebar = isSidebarOpened ? closeSidebar : openSidebar;
 
-export default toggleSidebarHOC( ToggleSidebarButton );
+	return [ isSidebarOpened, toggleSidebar ];
+};
+
+export default ToggleSidebarButton;
