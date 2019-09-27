@@ -1,45 +1,41 @@
 <?php
 
 /**
- * Plugin Name: JS-Advancers-Gutenberg-Boilerplate
- * Description: 
+ * Plugin Name: Gutenberg Boilerplate
+ * Description: A template for building Gutenberg blocks.
+ * Author: js-advancers
+ * Text Domain: gutenberg-boilerplate
  * Version: 1.0.0
- * Author: JS-Advancers
- * Text Domain: js_advancers_gb_boilerplate
- *
  */
 
-add_action( 'init', 'register_block_assets' );
 
-function register_block_assets() {
-
-    // register the main JS file that houses all our blocks
+add_action('init', 'register_block_types');
+function register_block_types() {
+    
+    $block_path = 'build/index.js';
+    $script_deps = include __DIR__ . '/build/index.asset.php';
     wp_register_script(
-        'block-js',
-        plugins_url( '/build/index.js' , __FILE__ ),
-        ['wp-blocks']
+        'example-block',
+        plugins_url($block_path, __FILE__ ),
+        $script_deps['dependencies'],
+        $script_deps['version']
     );
 
-    // register our block styles
     wp_register_style(
-        'block-style',
-        plugins_url( '/style.css' , __FILE__ ),
-        []    
-    );
-
-    // register our editor styles
-    wp_register_style(
-        'block-editor-style',
-        plugins_url( '/editor.css' , __FILE__ ),
+        "example-block-styles",
+        plugins_url("/style.css", __FILE__ ),
         []
     );
 
-    // register our block
-    register_block_type( 'jsadvancers/basic-block', array(
-        'editor_script' => 'block-js',
-        'editor_style' => 'block-editor-style',
-        'style' => 'block-style'
-    ));
+    wp_register_style(
+        "example-block-editor-styles",
+        plugins_url("/editor.css", __FILE__ ),
+        []
+    );
 
-
+    register_block_type('jsadvancers/example', [
+        'editor_script' =>  'example-block',
+        'style' =>  'example-block-styles',
+        'editor_style' =>  'example-block-editor-styles',
+    ]);
 }
