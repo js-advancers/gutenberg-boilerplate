@@ -31,10 +31,9 @@
 		"url": "https://github.com/js-advancers/gutenberg-boilerplate/issues"
 	},
 	"homepage": "https://github.com/js-advancers/gutenberg-boilerplate#readme",
-	"dependencies": {
-		"@wordpress/scripts": "^5.0.0"
-	},
+	"dependencies": {},
 	"devDependencies": {
-		"@wordpress/eslint-plugin": "^3.0.0"
+		"@wordpress/eslint-plugin": "^3.0.0",
+		"@wordpress/scripts": "^5.0.0"
 	}
 }

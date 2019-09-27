@@ -1,8 +1,15 @@
+const { __ } = wp.i18n;
+
 const save = ( props ) => {
+  const { className } = props;
+
 	const { attributes: {} } = props;
 
 	return (
-		null
+    <div className={className}>
+      <p>{__('Karen Data Block', 'gutenberg-boilerplate')}</p>
+
+    </div>
 	);
 };
 
