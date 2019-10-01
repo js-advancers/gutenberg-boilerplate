@@ -4,7 +4,7 @@ import metadata from './block.json';
 import edit from './edit';
 import save from './save';
 
-registerBlockType( 'arvernus/slide-video', {
+registerBlockType( 'jsadvancers/example', {
 	...metadata,
 	edit,
 	save,
