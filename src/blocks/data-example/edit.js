@@ -1,8 +1,14 @@
+import ToggleSidebarControl from './components/toggleSidebarControl';
+
 const edit = ( props ) => {
-	const { attributes: { }, setAttributes } = props;
+	const {
+		attributes: { },
+	} = props;
 
 	return (
-		null
+		<p>
+            Hello World!<ToggleSidebarControl />
+		</p>
 	);
 };
 
